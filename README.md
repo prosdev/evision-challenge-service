@@ -27,5 +27,41 @@ and to get started exploring the server, run:
 npm start
 ```
 
+### Supported Queries
+A list of queries supported with this service. 
+
+Get location data sample:
+```code
+query getLocationData{
+  getWeather(zipcode:97230) {
+    cityName
+    temperature
+    timezoneInfo {
+      timeZoneId
+      timeZoneName
+    }
+    elevation
+  }
+}
+```
+
+Will return a response in the following format:
+```code
+{
+  "data": {
+    "getWeather": {
+      "cityName": "Portland",
+      "temperature": 61.52,
+      "timezoneInfo": {
+        "timeZoneId": "America/Los_Angeles",
+        "timeZoneName": "Pacific Daylight Time"
+      },
+      "elevation": 19.27189826965332
+    }
+  }
+}
+```
+
+
 
 
