@@ -27,3 +27,6 @@ benchmarks/graphs
 
 #IDE
 .idea
+
+config.js
+yarn.lock
