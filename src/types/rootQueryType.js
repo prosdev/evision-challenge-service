@@ -3,7 +3,7 @@ import {
     GraphQLInt,
     GraphQLNonNull
 } from 'graphql';
-import WeatherType from '../types/weatherType';
+import WeatherType from './WeatherType';
 import axios from 'axios';
 import config from '../../config';
 
@@ -34,15 +34,19 @@ const RootQueryType = new GraphQLObjectType({
                         const lat = res.data.coord.lat;
                         const lon = res.data.coord.lon;
                         const timestamp = res.data.dt;
-
+                        console.log(res.data);
                         const GOOGLEMAP_TIMEZONE_FULL_URL = `${GOOGLEMAP_TIME_ZONE_URL}location=${lat},${lon}&timestamp=${timestamp}&key=${GOOGLEMAP_API_KEY}`;
                         const GOOGLEMAP_ELEVATION_FULL_URL=`${GOOGLEMAP_ELEVATION_URL}locations=${lat},${lon}&key=${GOOGLEMAP_API_KEY}`;
 
-                        res.data.timezoneInfo = await axios.get(GOOGLEMAP_TIMEZONE_FULL_URL).then(res => res.data);
-                        res.data.elevation = await axios.get(GOOGLEMAP_ELEVATION_FULL_URL).then(res => res.data.results[0].elevation);
+                        res.data.timeZoneInfo = await axios.get(GOOGLEMAP_TIMEZONE_FULL_URL).then(res => res.data).catch( err => {
+                            console.log(err);
+                        });
+                        res.data.elevation = await axios.get(GOOGLEMAP_ELEVATION_FULL_URL).then(res => res.data.results[0].elevation).catch( err => {
+                            console.log(err);
+                        });
                         return res.data;
                     }).catch( err => {
-                        throw new Error(err);
+                        console.log(err);
                     });
             }
         }

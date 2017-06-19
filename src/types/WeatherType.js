@@ -4,7 +4,8 @@ import {
     GraphQLFloat
 } from 'graphql';
 
-import TimeZoneType from './timeZoneType';
+import TimeZoneType from './TimeZoneType';
+import CoordinateType from './CoordinateType';
 
 const WeatherType = new GraphQLObjectType({
     name: 'WeatherType',
@@ -25,13 +26,17 @@ const WeatherType = new GraphQLObjectType({
             return convertToFarenheit(temp);
             }
         },
-        timezoneInfo: {
+        timeZoneInfo: {
             type: TimeZoneType,
             description: 'Time zone information at given location'
         },
         elevation: {
             type: GraphQLFloat,
             description: 'Elevation at given location'
+        },
+        coord: {
+            type: CoordinateType,
+            description: 'Coordinate of given location'
         }
     })
 });

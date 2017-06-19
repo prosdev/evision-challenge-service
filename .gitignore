@@ -30,3 +30,5 @@ benchmarks/graphs
 
 config.js
 yarn.lock
+cert.pem
+key.pem
